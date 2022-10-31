@@ -1,0 +1,32 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+      List<Integer> l=new ArrayList<>();
+        if(s.length()<p.length())return l;
+      int pHash[]=new int[26];
+      int sHash[]=new int[26];
+      for(int i=0;i<p.length();i++)
+      {
+          pHash[p.charAt(i)-'a']++;
+          sHash[s.charAt(i)-'a']++;
+      }
+      if(Arrays.equals(pHash,sHash))//at first we check both array are equal
+      {
+          l.add(0);
+      }
+     int start=0;
+     int end=p.length();
+        while(end<s.length())
+        {
+            sHash[s.charAt(start)-'a']--;
+            sHash[s.charAt(end)-'a']++;
+            if(Arrays.equals(pHash,sHash))
+            {
+                l.add(start+1);//add the starting index to the list
+            }
+            start++;//increment
+            end++;
+        }
+        return l;
+        
+    }
+}
